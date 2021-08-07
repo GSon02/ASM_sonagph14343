@@ -26,9 +26,14 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(sql);
         sql = "INSERT INTO PHANLOAI VALUES(null, 'Sinh Hoat' + 'Chi')";
         db.execSQL(sql);
+
         sql = "CREATE TABLE GIAODICH(MaGD integer primary key autoincrement," +
                 "TieuDe text, Ngay text,Tien text,MoTa text," +
                 "MaLoai integer references PHANLOAI(MaLoai))";
+        sql = "INSERT INTO GIAODICH VALUES(null,'Luong Thang 7', '2021-08-07',1000,'Luong Thang 7, on dinh',1)";
+        db.execSQL(sql);
+        sql = "INSERT INTO GIAODICH VALUES(null,'Tien mua thuc an hang ngay', '2021-08-07',1000,'Luong Thang 7, on dinh',1)";
+        db.execSQL(sql);
     }
 
     @Override

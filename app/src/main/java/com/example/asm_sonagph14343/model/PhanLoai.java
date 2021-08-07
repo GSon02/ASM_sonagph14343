@@ -13,6 +13,10 @@ public class PhanLoai {
         this.tenLoai = tenLoai;
         this.trangThai = trangThai;
     }
+    public PhanLoai(String tenLoai, String trangThai) {
+        this.tenLoai = tenLoai;
+        this.trangThai = trangThai;
+    }
 
     public int getMaLoai() {
         return maLoai;

@@ -1,5 +1,6 @@
 package com.example.asm_sonagph14343.dao;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -33,9 +34,41 @@ public class PhanLoaiDAO {
             ds.add(Pl);
             cs.moveToNext();
         }
+        cs.close();
+        db.close();
         return ds;
     }
-    public void insert(){}
-    public void update(){}
-    public void delete(){}
+    public boolean insert(PhanLoai phanLoai){
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("TenLoai",phanLoai.getTenLoai());
+        contentValues.put("TrangThai", phanLoai.getTrangThai());
+        long row = db.insert("PHANLOAI",null,contentValues);
+        return (row > 0);
+    }
+    public boolean insert(String tenLoai, String trangThai){
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("TenLoai",tenLoai);
+        contentValues.put("TrangThai", trangThai);
+        long row = db.insert("PHANLOAI",null,contentValues);
+        return (row > 0);
+    }
+    public boolean update(PhanLoai phanLoai){
+        //String sql = "UPDATE PHANLOAI SET  TenLoai=?, TrangThai=? WHERE MaLoai=?";
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("TenLoai",phanLoai.getTenLoai());
+        contentValues.put("TrangThai", phanLoai.getTrangThai());
+        int row = db.update("PHANLOAI", contentValues, "WHERE MaLoai=?",
+                new String[]{phanLoai.getMaLoai()+""});
+        return (row>0);
+    }
+    public boolean delete(int maLoai){
+        //String sql = "DELETE FROM PHANLOAI WHERE MaLoai=?";
+        SQLiteDatabase db = helper.getWritableDatabase();
+        int row = db.delete("PHANLOAI","WHERE MaLoai=?",
+                new String[]{maLoai+""});
+        return(row>0);
+    }
 }
